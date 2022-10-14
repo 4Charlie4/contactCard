@@ -1,7 +1,5 @@
-// import { openDB } from "idb";
-// import "regenerator-runtime/runtime";
-
 import { openDB } from "idb";
+import "regenerator-runtime/runtime";
 
 // //When it comes to functions you must specifically export them like this so that you can import them.
 export const initData = async () => {
@@ -83,7 +81,8 @@ export const editData = async (id, name, email, phone, profile) => {
 
   const store = tx.objectStore("contacts");
 
-  const request = store.put({id: id,
+  const request = store.put({
+    id: id,
     name: name,
     email: email,
     phone: phone,
