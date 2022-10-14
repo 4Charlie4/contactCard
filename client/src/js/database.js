@@ -1,6 +1,8 @@
 // import { openDB } from "idb";
 // import "regenerator-runtime/runtime";
 
+import { openDB } from "idb";
+
 // //When it comes to functions you must specifically export them like this so that you can import them.
 export const initData = async () => {
   //Creates new database with version number
@@ -20,4 +22,38 @@ export const initData = async () => {
       console.log("Contacts store created");
     },
   });
+};
+
+export const getData = async () => {
+  console.log("GETALL from Database");
+
+  //Connects to the Database and the version we want to use
+  const contactDb = await openDB("contact_db", 1);
+  //Creates a new transaction and allows you to specify what store and what you can do to it.
+  const tx = contactDb.transaction("contacts", "readonly");
+  //Opens the specified object store
+  const store = tx.objectStore("contacts");
+  //Gets all data from database.
+  const request = store.getAll();
+
+  const result = await request;
+  console.log("result.value", result);
+  return result;
+};
+
+export const addData = async (name, email, phone, profile) => {
+  console.log("POST to Database");
+  const contactDb = await openDB("contact_db", 1);
+
+  const tx = contactDb.transaction("contacts", "readwrite");
+
+  const store = tx.objectStore("contacts");
+  const request = store.add({
+    name: name,
+    email: email,
+    phone: phone,
+    profile: profile,
+  });
+  const result = await request;
+  console.log("🚀 - data saved to the database", result);
 };
