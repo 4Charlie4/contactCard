@@ -12,10 +12,10 @@ import { Tooltip, Toast, Popover } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //Database
-import { initData } from "./database";
+import { initData, getData, addData } from "./database";
 
 window.addEventListener("load", function () {
-  initData();
+
   document.getElementById("logo").src = Logo;
   document.getElementById("bearThumbnail").src = Bear;
   document.getElementById("dogThumbnail").src = Dog;
