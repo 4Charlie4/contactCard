@@ -12,7 +12,7 @@ import { Tooltip, Toast, Popover } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //Database
-import { initData, getData, addData } from "./database";
+import { initData, getData, addData, delData } from "./database";
 
 //UserExperience
 import { fetchCards } from "./cards.js";
@@ -59,3 +59,11 @@ form.addEventListener("submit", (event) => {
   // Reload the DOM
   fetchCards();
 });
+
+window.deleteCard = (e) => {
+  let id = parseInt(e.id);
+
+  delData(id);
+
+  fetchCards();
+};
