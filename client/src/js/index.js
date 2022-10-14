@@ -12,7 +12,7 @@ import { Tooltip, Toast, Popover } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //Database
-import { initData, getData, addData, delData } from "./database";
+import { initData, getData, addData, delData, editData } from "./database";
 
 //UserExperience
 import { fetchCards } from "./cards.js";
@@ -47,6 +47,13 @@ form.addEventListener("submit", (event) => {
   if (submitBtnToUpdate == false) {
     addData(name, email, phone, profile);
   } else {
+    // Obtains values passed into the form element
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let profile = document.querySelector('input[type="radio"]:checked').value;
+    // Calls the editDB function passing in any values from the form element as well as the ID of the contact that we are updating
+    editData(profileId, name, email, phone, profile);
     fetchCards();
     // Toggles the submit button back to POST functionality
     submitBtnToUpdate = false;
@@ -66,4 +73,22 @@ window.deleteCard = (e) => {
   delData(id);
 
   fetchCards();
+};
+
+window.editCard = (e) => {
+  profileId = parseInt(e.dataset.id);
+
+  let editName = e.dataset.name;
+  let editEmail = e.dataset.email;
+  let editPhone = e.dataset.phone;
+
+  document.getElementById("name").value = editName;
+  document.getElementById("email").value = editEmail;
+  document.getElementById("phone").value = editPhone;
+  
+
+  form.style.display = "block";
+
+  //toggles button to update instead of Post
+  submitBtnToUpdate = true;
 };
