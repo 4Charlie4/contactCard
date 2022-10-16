@@ -13,7 +13,7 @@ export const initData = async () => {
         return;
       }
       //creates new Database with an ID that auto increments
-      db.createObjectStore.contains("contacts", {
+      db.createObjectStore("contacts", {
         keyPath: "id",
         autoIncrement: true,
       });
@@ -36,6 +36,7 @@ export const getData = async () => {
 
   const result = await request;
   console.log("result.value", result);
+
   return result;
 };
 
