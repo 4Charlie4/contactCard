@@ -18,12 +18,29 @@ import { initData, getData, addData, delData, editData } from "./database";
 //UserExperience
 import { fetchCards } from "./cards.js";
 
+const installBtn = document.getElementById("installBtn");
+
 window.addEventListener("load", function () {
   initData();
   fetchCards();
   document.getElementById("logo").src = Logo;
   document.getElementById("bearThumbnail").src = Bear;
   document.getElementById("dogThumbnail").src = Dog;
+});
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = "visible";
+
+  installBtn.addEventListener("click", () => {
+    event.prompt();
+    installBtn.setAttribute("disabled", true);
+    installBtn.textContent = "Installed";
+  });
+});
+
+window.addEventListener("appinstalled", (event) => {
+  console.log("Application installed", event);
 });
 
 // Form functionality
