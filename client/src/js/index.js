@@ -5,6 +5,7 @@ import { toggleForm, clearForm } from "./form";
 import Logo from "../images/Charlie.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
+
 //css
 import "../css/index.css";
 //bootstrap  & popper
@@ -85,10 +86,15 @@ window.editCard = (e) => {
   document.getElementById("name").value = editName;
   document.getElementById("email").value = editEmail;
   document.getElementById("phone").value = editPhone;
-  
 
   form.style.display = "block";
 
   //toggles button to update instead of Post
   submitBtnToUpdate = true;
 };
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
